@@ -54,7 +54,7 @@ jobs:
           # secrets.GIT_EMAIL 是 工作流失败之后，需要通知的邮箱，换成自己的，一般写github账号邮箱         
           # secrets.ACCESS_TOKEN 需要自己创建，应用访问token，工作流执行的时候需要         
         run: |          
-          cd .build/      
+          cd ./build/      
           git config --global init.defaultBranch master          
           git config --global --add safe.directory "*"          
           git init          
