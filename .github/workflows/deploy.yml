@@ -1,0 +1,66 @@
+name: deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-workflow
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Setup NPM
+        run: |
+          NPM_VERSION=$(jq -r .engines.npm package.json)
+          NPM_VERSION=${NPM_VERSION/\^/}
+          if [ "$(npm --version)" != "$NPM_VERSION" ]; then
+            npm install -g npm@$NPM_VERSION && npm --version
+          else
+            echo "NPM version is same as package.json engines.npm"
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test before production
+        run: npm test
+
+      - name: Build tool
+        run: npm run build
+        env:
+          NODE_ENV: production
+      - name: Deploy to Pages         
+        env:          
+          TZ: Asia/Shanghai         
+          #下面的 JourneyFlower 记得替换成自己的github帐号          
+          #@github.com/JourneyFlower/article.git 也替换成自己的         
+          # secrets.GIT_EMAIL 是 工作流失败之后，需要通知的邮箱，换成自己的，一般写github账号邮箱         
+          # secrets.ACCESS_TOKEN 需要自己创建，应用访问token，工作流执行的时候需要         
+        run: |          
+          cd .vitepress/dist          
+          git config --global init.defaultBranch main          
+          git config --global --add safe.directory "*"          
+          git init          
+          git config user.name "JourneyFlower"          
+          git config user.email "${{ secrets.GIT_EMAIL }}"          
+          git add .          
+          git commit -m "Deploying to blog-pages from @ $GITHUB_SHA in $(date +"%Y年%m月%d日 %T %Z")"          
+          git push -f https://JourneyFlower:${{ secrets.ACCESS_TOKEN }}@github.com/JourneyFlower/nginxconfig.git master:blog-pages          
+          cd -          
