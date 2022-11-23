@@ -55,7 +55,7 @@ jobs:
           # secrets.ACCESS_TOKEN 需要自己创建，应用访问token，工作流执行的时候需要         
         run: |          
           cd .vitepress/dist          
-          git config --global init.defaultBranch main          
+          git config --global init.defaultBranch master          
           git config --global --add safe.directory "*"          
           git init          
           git config user.name "JourneyFlower"          
