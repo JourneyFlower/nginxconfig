@@ -1,0 +1,350 @@
+code[class*="language-"],
+pre[class*="language-"] {
+    color: #676767;
+    font-family: monospace,serif;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    font-size: 13.6px;
+    line-height: 1.4em;
+
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    background: #b3d4fc;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border: 2px solid #f1f1f1;
+    background-color: #fafafa;
+}
+
+/* Single line prefix */
+pre[class*="language-"] > code[data-prefix]:before {
+  color:#676767;
+  content: attr(data-prefix);
+  padding-right: 8px;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .2em;
+    padding-top: 1px; padding-bottom: 1px;
+    background: #fafafa;
+    border: 2px solid #f1f1f1;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #999;
+    font-style: italic;
+}
+
+.token.namespace {
+    opacity: .7;
+}
+
+.token.string,
+.token.attr-value {
+    color: #15cd72;
+}
+.token.punctuation,
+.token.operator {
+    color: #393A34; /* no highlight */
+}
+
+.token.entity,
+.token.url,
+.token.symbol,
+.token.number,
+.token.boolean,
+.token.variable,
+.token.constant,
+.token.property,
+.token.regex,
+.token.inserted {
+    color: #36acaa;
+}
+
+.token.atrule,
+.token.keyword,
+.token.attr-name,
+.language-autohotkey .token.selector {
+    color: #0069ff;
+    font-weight: bold;
+}
+
+.token.function,
+.token.deleted,
+.language-autohotkey .token.tag {
+    color: #0069ff;
+}
+
+.token.tag,
+.token.selector,
+.language-autohotkey .token.keyword {
+    color: #0069ff;
+}
+
+.token.important,
+.token.function,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em; /* Same as .prism’s padding-top */
+
+  background: hsla(0, 0%, 65%,.08);
+  background: linear-gradient(to right, hsla(0, 0%, 65%, 0.1) 70%, hsla(0, 0%, 50%,0));
+
+  pointer-events: none;
+
+  line-height: inherit;
+  white-space: pre;
+}
+
+.line-highlight:before,
+  .line-highlight[data-end]:after {
+    content: '\27A1';
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 0.5em;
+    width: 31px;
+    color: #999;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 17px;
+    background-color: #f1f1f1;
+  }
+
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #dfdfdf;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+  .line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+  }
+
+    .line-numbers-rows > span:before {
+      content: counter(linenumber);
+      color: #999;
+      display: block;
+      padding-right: 0.8em;
+      text-align: right;
+    }
+
+div.code-toolbar {
+  position: relative;
+}
+
+div.code-toolbar > .toolbar {
+  position: absolute;
+  top: .3em;
+  right: .2em;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+}
+
+div.code-toolbar:hover > .toolbar {
+  opacity: 1;
+}
+
+div.code-toolbar > .toolbar .toolbar-item {
+  display: inline-block;
+}
+
+div.code-toolbar > .toolbar a {
+  cursor: pointer;
+}
+
+div.code-toolbar > .toolbar a,
+div.code-toolbar > .toolbar button,
+div.code-toolbar > .toolbar span {
+  color: #0069ff;
+  font-size: 13px;
+  padding: 0 .5em;
+  text-decoration: none;
+  font-family: proxima-nova,'helvetica neue',helvetica,arial,sans-serif;
+}
+
+@keyframes prism-click-to-copy-floatup {
+  20% {
+    opacity: 0.999;
+  }
+
+  100% {
+    transform: translate3d(-50%, -17px, 0);
+  }
+}
+
+div.code-toolbar > .toolbar a:after {
+  color: #0069ff;
+  content: 'Copied';
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  opacity: 0.001;
+  text-align: center;
+  transform: translate3d(-50%, 0, 0);
+  -webkit-backface-visibility: hidden;
+  white-space: nowrap;
+}
+
+div.code-toolbar > .toolbar a.copying:after {
+  animation: prism-click-to-copy-floatup 0.5s ease-in-out;
+}
+
+
+.command-line-prompt {
+  border-right: 1px solid #999;
+  display: block;
+  float: left;
+  font-size: 100%;
+  letter-spacing: -1px;
+  margin-right: 1em;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.command-line-prompt > span:before {
+  color: #999;
+  content: ' ';
+  display: block;
+  padding-right: 0.8em;
+}
+
+.command-line-prompt > span[data-user]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] $";
+}
+
+.command-line-prompt > span[data-user="root"]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] #";
+}
+
+.command-line-prompt > span[data-prompt]:before {
+  content: attr(data-prompt);
+}
+
+/* code block title */
+pre[class*="code-block-title"][data-title] {
+  padding-top: 40px;
+}
+
+pre[class*="code-block-title"][data-title] + .toolbar {
+  margin-top: 30px;
+}
+
+pre[class*="code-block-title"][data-title]:before {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 30px;
+  text-align: center;
+  content: attr(data-title);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+  background: #fff;
+  border: 2px solid #f1f1f1;
+}
+
+pre[class*="code-block-title"][class*="line-numbers"][data-title]:before {
+  border-width: 0 0 2px 0
+}
+
+pre[class*="code-block-title"][class*="code-block-title-center"]:before {
+  justify-content: center;
+}
+
+pre[class*="code-block-title"][class*="code-block-title-right"]:before {
+  justify-content: flex-end;
+}
+
+pre[class*="code-block-title"][data-title] .line-highlight {
+  margin-top: 40px;
+}
+
+pre.diff-highlight > code .token.deleted:not(.prefix),
+pre > code.diff-highlight .token.deleted:not(.prefix) {
+	background-color: rgba(255, 0, 0, .1);
+	color: inherit;
+	display: block;
+}
+
+pre.diff-highlight > code .token.inserted:not(.prefix),
+pre > code.diff-highlight .token.inserted:not(.prefix) {
+	background-color: rgba(0, 255, 128, .1);
+	color: inherit;
+	display: block;
+}
